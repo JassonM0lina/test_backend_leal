@@ -12,7 +12,7 @@ const app = express();
 require('./controllers/passport');
 
 //settings
-app.set("port", process.env.PORT || 4000);
+app.set("port", process.env.PORT || 4001);
 
 //Middlewares
 app.use(session({

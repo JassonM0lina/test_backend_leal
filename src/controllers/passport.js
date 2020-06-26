@@ -30,7 +30,7 @@ passport.use('local.signup', new LocalStrategy({
         return done(null, false, req.flash('message','The input data is not correct'));
     }
     
-    // Validate that the user does not exist
+    // Validate if the user exist
     let exists_user = await User.findOne({
         where: {
             email: user.email
