@@ -13,9 +13,13 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.4",
     "express-session": "^1.17.1",
+    "joi": "^14.3.1",
+    "md5": "^2.2.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
