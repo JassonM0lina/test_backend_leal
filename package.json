@@ -12,7 +12,15 @@
     "dev_user_login": "nodemon src/user_login/server.js --exec babel-node",
     "dev_user_register": "nodemon src/user_register/server.js --exec babel-node",
     "build": "babel src --out-dir dist",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "test": "mocha",
+    "start_transaction_excel": "nodemon dist/transaction_excel/server.js --exec babel-node",
+    "start_transaction_totalpoints": "nodemon dist/transaction_totalpoints/server.js --exec babel-node",
+    "start_transaction_history": "nodemon dist/transaction_history/server.js --exec babel-node",
+    "start_transaction_inactive": "nodemon dist/transaction_inactive/server.js --exec babel-node",
+    "start_transaction_create": "nodemon dist/transaction_create/server.js --exec babel-node",
+    "start_user_login": "nodemon dist/user_login/server.js --exec babel-node",
+    "start_user_register": "nodemon dist/user_register/server.js --exec babel-node"
   },
   "keywords": [],
   "author": "JassonM0lina",
@@ -21,6 +29,8 @@
     "@babel/polyfill": "^7.10.1",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.4",
     "express-session": "^1.17.1",
@@ -41,6 +51,9 @@
     "@babel/core": "^7.10.3",
     "@babel/node": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.0.1",
     "nodemon": "^2.0.4",
     "sequelize-cli": "^6.0.0"
   }

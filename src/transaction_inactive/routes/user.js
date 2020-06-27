@@ -4,7 +4,7 @@ const router = express.Router();
 const verifyToken = require('../controllers/verifyToken')
 
 
-router.post('/transaction/inactive/:id',verifyToken,async (req,res) =>{
+router.put('/transaction/inactive/:id',verifyToken,async (req,res) =>{
 
     try {
         // Verify if the user exists        

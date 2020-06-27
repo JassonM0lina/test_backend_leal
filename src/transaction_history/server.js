@@ -8,7 +8,7 @@ const app = express();
 
 
 //settings
-app.set("port", process.env.PORT || 4004);
+app.set("port", process.env.PORT_TH || 4004);
 
 //Middlewares
 app.use(morgan("dev"));

@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const path = require('path');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const database = require('./database/database');
@@ -12,7 +11,7 @@ const app = express();
 require('./controllers/passport');
 
 //settings
-app.set("port", process.env.PORT || 4000);
+app.set("port", process.env.PORT_UR || 4000);
 
 //Middlewares
 app.use(session({
@@ -39,9 +38,11 @@ app.use(require("./routes/user"));
 //Starting the server
 database.authenticate()
   .then(() => {
+    
     app.listen(app.get('port'), () => {
       console.log("server on port", app.get('port'));
     });
+    
   })
   .catch((err) => {
      console.error('Unable to connect to the database:', err);

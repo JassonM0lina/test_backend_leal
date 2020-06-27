@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const path = require('path');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const database = require('./database/database');
@@ -12,7 +11,7 @@ const app = express();
 require('./controllers/passport');
 
 //settings
-app.set("port", process.env.PORT || 4001);
+app.set("port", process.env.PORT_UL || 4001);
 
 //Middlewares
 app.use(session({

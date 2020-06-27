@@ -8,7 +8,7 @@ const app = express();
 
 
 //settings
-app.set("port", process.env.PORT || 4002);
+app.set("port", process.env.PORT_TC || 4002);
 
 //Middlewares
 app.use(morgan("dev"));
@@ -17,7 +17,7 @@ app.use(express.json());
 
 //Routes
 app.use(require("./routes/user"));
-
+app.use(require('dotenv').config);
 //Starting the server
 database.authenticate()
   .then(() => {
