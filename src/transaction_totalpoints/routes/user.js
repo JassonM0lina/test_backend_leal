@@ -34,7 +34,7 @@ router.post('/transaction/inactive/:id',verifyToken,async (req,res) =>{
         console.log(err);
         res.status(500).json({
             error: true,
-            message: 'Error: The transaction could not be inactive!'
+            message: 'Error: could not send the total points!'
         });
     }
   

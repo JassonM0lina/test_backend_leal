@@ -41,7 +41,7 @@ router.post('/transaction/create',verifyToken,async (req,res) =>{
         console.log(err);
         res.status(500).json({
             error: true,
-            message: 'Error al crear transacción!'
+            message: 'Error: Could not created the transaction!'
         });
     }
   

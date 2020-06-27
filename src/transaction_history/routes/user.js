@@ -4,7 +4,7 @@ const router = express.Router();
 const verifyToken = require('../controllers/verifyToken')
 
 
-router.post('/transaction/inactive/:id',verifyToken,async (req,res) =>{
+router.post('/transaction/history',verifyToken,async (req,res) =>{
 
     try {
         // Verify if the user exists        
@@ -14,17 +14,15 @@ router.post('/transaction/inactive/:id',verifyToken,async (req,res) =>{
             }
         });       
         if(!user){
-            return res.status(404).send('the user does not have transaction yet');
+            return res.status(404).send('The user does not have transactions');
         }
         //create the transaction
-        let transaction = await Transaction.update({ 
-            status: 0 
-            }, {
-            where: {                
-                transaction_id: req.params.id,
-                user_id: req.userId,
-                status: 1 
-            },
+        let transaction = await Transaction.findAll({
+            attributes: ['transaction_id','created_date','value','points','status'],
+            order:[['created_date','DESC']],
+            where: {
+            user_id: req.userId
+            }
         });
         res.json({
             error: false,
@@ -34,7 +32,7 @@ router.post('/transaction/inactive/:id',verifyToken,async (req,res) =>{
         console.log(err);
         res.status(500).json({
             error: true,
-            message: 'Error: The transaction could not be inactive!'
+            message: 'Error: could not send history!'
         });
     }
   
