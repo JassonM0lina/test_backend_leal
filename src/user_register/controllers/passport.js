@@ -2,6 +2,8 @@ const passport = require('passport');
 const User = require('../model/User');
 const LocalStrategy = require('passport-local').Strategy;
 const encrypt = require('../controllers/encrypt');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 const Joi = require('joi');
 const md5 = require('md5');
 
@@ -43,8 +45,9 @@ passport.use('local.signup', new LocalStrategy({
     }
     
     // Create the new user
+    let UserId = md5(user.email);
     let newUser = await User.create({
-        user_id: md5(user.email),
+        user_id: UserId ,
         created_date: new Date(),
         name: name,
         lastname: user.lastname,
@@ -52,7 +55,11 @@ passport.use('local.signup', new LocalStrategy({
         email: user.email,
         password: await encrypt.encryptPassword(password)
     });
+        const token = jwt.sign({id: UserId }, config.secret,{
+            expiresIn: 60*60*24
+        })       
         console.log('The user was created: welcome ' + user.name+ ' ' + user.lastname);
+        console.log({token})
         return done(null, newUser);
 
 }));

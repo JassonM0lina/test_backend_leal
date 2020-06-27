@@ -1,8 +1,14 @@
+const Sequelize = require('sequelize');
+const db =require('../database/database');
+
 const Transaction = db.define('TRANSACTION', {
     transaction_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
+    },
+    user_id: {
+        type: Sequelize.INTEGER
     },
     created_date: {
         type: Sequelize.DATE,
@@ -18,10 +24,8 @@ const Transaction = db.define('TRANSACTION', {
     status: {
         type: Sequelize.INTEGER,
         defaultValue: 1
-    },
-    user_id: {
-        type: Sequelize.INTEGER
     }
+
 }, {
     timestamps: false,
     tableName: 'TRANSACTION'

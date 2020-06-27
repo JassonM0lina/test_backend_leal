@@ -4,23 +4,23 @@ const router = express.Router();
 
 const passport = require('passport');
 
-router.get('/signin',(req,res)=>{
+router.get('/signin',isNotLoggedIn,(req,res)=>{
     res.send('Welcome to abc, Sign In to continue win points')
 });
 
 
-router.post('/signin', passport.authenticate('local.signin',{
+router.post('/signin', isNotLoggedIn ,passport.authenticate('local.signin',{
         successRedirect: '/profile',
         failureRedirect: '/signin',
         failureFlash: false   
     }));
 
 
-router.get('/profile',(req,res) =>{
+router.get('/profile',isLoggedIn,(req,res) =>{
     res.send('This is your abc Profile')
 });
 
-router.get("/logout",(req,res)=>{
+router.get("/logout",isLoggedIn,(req,res)=>{
     req.logOut();
     res.redirect("/signin");
 });

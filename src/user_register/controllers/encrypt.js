@@ -8,12 +8,5 @@ encrypt.encryptPassword = async (password) =>{
     return hash;
 };
 
-encrypt.matchPassword = async (password, savedPassword) => {
-    try{
-        return await bcrypt.compare(password, savedPassword);
-    } catch(e){
-        console.log(e);
-    }
-};
 
 module.exports = encrypt;
