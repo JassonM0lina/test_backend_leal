@@ -27,6 +27,7 @@ passport.use('local.signup', new LocalStrategy({
         
     const {error} = Joi.validate(user, schema);  
     if (error){
+        console.log('the input data is not correct')
         return done(null, false, req.flash('message','The input data is not correct'));
     }
     
@@ -37,7 +38,7 @@ passport.use('local.signup', new LocalStrategy({
         }
     })
     if(exists_user){
-        console.log('The user with email: ' + user.email + ' already exists. Try with another email.');
+        console.log('The user with email: ' + user.email +' already exists. Try with another email.');
         return done(null, false, req.flash('The user with email: ' + user.email + ' already exists. Try with another email.'));     
     }
     
@@ -51,7 +52,7 @@ passport.use('local.signup', new LocalStrategy({
         email: user.email,
         password: await encrypt.encryptPassword(password)
     });
-        
+        console.log('The user was created: welcome ' + user.name+ ' ' + user.lastname);
         return done(null, newUser);
 
 }));

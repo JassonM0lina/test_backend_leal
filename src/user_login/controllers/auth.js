@@ -1,6 +1,6 @@
 module.exports = {
     isLoggedIn(req, res, next) {
-      console.log('asdasd');
+      
       if (req.isAuthenticated()) {
         return next();
       }

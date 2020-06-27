@@ -2,9 +2,10 @@ const passport = require('passport');
 const User = require('../model/User');
 const LocalStrategy = require('passport-local').Strategy;
 const encrypt = require('../controllers/encrypt');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
+
 const Joi = require('joi');
-
-
 
 passport.use('local.signin', new LocalStrategy({
     usernameField: 'email',
@@ -12,9 +13,7 @@ passport.use('local.signin', new LocalStrategy({
     passReqToCallback: true
 
 }, async (req, email, password, done) => {
-
-    
-    console.log('entro')
+   
     // Validate if the input data is correct
     const schema = {
         email:Joi.string().required().email({ minDomainAtoms: 2 }),
@@ -40,8 +39,14 @@ passport.use('local.signin', new LocalStrategy({
     } else {
         const validPassword = await encrypt.matchPassword(password, user.password);
         if (validPassword) {
-            console.log('welcome '+ user.name + ' '+user.lastname);
-            done(null, user, req.flash('success','welcome'+ user.username));
+            
+             const token = jwt.sign({id: user.user_id}, config.secret,{
+                expiresIn: 60*60*24
+            })
+            
+            console.log('welcome '+ user.name + ' '+ user.lastname);
+            console.log({token})
+            done(null, user, req.flash('success','welcome '+ user.name + ' '+ user.lastname));
         } else {
             console.log('password incorrect');
             done(null, false, req.flash('message','Incorrect Password'));
