@@ -2,8 +2,6 @@ const passport = require('passport');
 const User = require('../model/User');
 const LocalStrategy = require('passport-local').Strategy;
 const encrypt = require('../controllers/encrypt');
-const jwt = require('jsonwebtoken');
-const config = require('../config/config');
 
 const Joi = require('joi');
 
@@ -38,14 +36,8 @@ passport.use('local.signin', new LocalStrategy({
         return done(null, false, req.flash('This account does not exist: Incorrect email or password.'));     
     } else {
         const validPassword = await encrypt.matchPassword(password, user.password);
-        if (validPassword) {
-            
-             const token = jwt.sign({id: user.user_id}, config.secret,{
-                expiresIn: 60*60*24
-            })
-            
+        if (validPassword) {      
             console.log('welcome '+ user.name + ' '+ user.lastname);
-            console.log({token})
             done(null, user, req.flash('success','welcome '+ user.name + ' '+ user.lastname));
         } else {
             console.log('password incorrect');

@@ -42,7 +42,8 @@ router.post('/transaction/excel', verifyToken, /*#__PURE__*/function () {
             res.xls('data.xlsx', user);
             res.setHeader('Content-disposition', 'attachment; filename=data.xlsx');
             res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            res.download(__dirname + '/data.xlsx');
+            res.download(__dirname + '/data.xlsx'); //console.log(res);
+
             _context.next = 16;
             break;
 

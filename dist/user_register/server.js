@@ -20,7 +20,7 @@ var app = express();
 require('./controllers/passport'); //settings
 
 
-app.set("port", process.env.PORT || 4000); //Middlewares
+app.set("port", process.env.PORT_UR || 4000); //Middlewares
 
 app.use(session({
   secret: 'abc',
@@ -40,7 +40,14 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash()); //Routes
+app.use(flash()); // Global Variables
+
+app.use(function (req, res, next) {
+  app.locals.success = req.flash("success");
+  app.locals.message = req.flash("message");
+  app.locals.user = req.user;
+  next();
+}); //Routes
 
 app.use(require("./routes/user")); //Starting the server
 
@@ -51,3 +58,4 @@ database.authenticate().then(function () {
 })["catch"](function (err) {
   console.error('Unable to connect to the database:', err);
 });
+module.exports = app;

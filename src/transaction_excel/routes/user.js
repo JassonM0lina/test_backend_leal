@@ -21,6 +21,7 @@ router.post('/transaction/excel',verifyToken,async (req,res) =>{
         res.setHeader('Content-disposition', 'attachment; filename=data.xlsx');
         res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         res.download(__dirname + '/data.xlsx');
+        //console.log(res);
        
     } catch (err) {
         console.log(err);

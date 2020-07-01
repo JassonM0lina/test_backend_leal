@@ -11,7 +11,7 @@ var json2xls = require('json2xls'); //Initialization
 
 var app = express(); //settings
 
-app.set("port", process.env.PORT || 4006); //Middlewares
+app.set("port", process.env.PORT_TE || 4006); //Middlewares
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({
@@ -29,3 +29,4 @@ database.authenticate().then(function () {
 })["catch"](function (err) {
   console.error('Unable to connect to the database:', err);
 });
+module.exports = app;

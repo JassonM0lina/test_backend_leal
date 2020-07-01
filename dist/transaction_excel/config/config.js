@@ -1,5 +1,5 @@
 "use strict";
 
 module.exports = {
-  secret: 'mysecrettoken'
+  secret: process.env.TOKEN || 'mysecrettoken'
 };

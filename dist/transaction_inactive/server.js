@@ -9,7 +9,7 @@ var database = require('./database/database'); //Initialization
 
 var app = express(); //settings
 
-app.set("port", process.env.PORT || 4003); //Middlewares
+app.set("port", process.env.PORT_TI || 4003); //Middlewares
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({
@@ -26,3 +26,4 @@ database.authenticate().then(function () {
 })["catch"](function (err) {
   console.error('Unable to connect to the database:', err);
 });
+module.exports = app;

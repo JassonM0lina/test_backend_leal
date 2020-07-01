@@ -32,6 +32,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+// Global Variables
+app.use((req, res, next) => {
+  app.locals.success = req.flash("success");
+  app.locals.message = req.flash("message");
+  app.locals.user = req.user;
+  next();
+});
+
 //Routes
 app.use(require("./routes/user"));
 
@@ -47,3 +55,5 @@ database.authenticate()
   .catch((err) => {
      console.error('Unable to connect to the database:', err);
   });
+
+  module.exports = app;

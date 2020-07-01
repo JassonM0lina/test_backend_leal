@@ -20,7 +20,7 @@ var app = express();
 require('./controllers/passport'); //settings
 
 
-app.set("port", process.env.PORT || 4001); //Middlewares
+app.set("port", process.env.PORT_UL || 4001); //Middlewares
 
 app.use(session({
   secret: 'abc',
@@ -58,3 +58,4 @@ database.authenticate().then(function () {
 })["catch"](function (err) {
   console.error('Unable to connect to the database:', err);
 });
+module.exports = app;

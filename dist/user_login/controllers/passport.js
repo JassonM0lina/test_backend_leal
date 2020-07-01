@@ -12,10 +12,6 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var encrypt = require('../controllers/encrypt');
 
-var jwt = require('jsonwebtoken');
-
-var config = require('../config/config');
-
 var Joi = require('joi');
 
 passport.use('local.signin', new LocalStrategy({
@@ -24,7 +20,7 @@ passport.use('local.signin', new LocalStrategy({
   passReqToCallback: true
 }, /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, email, password, done) {
-    var schema, _Joi$validate, error, user, validPassword, token;
+    var schema, _Joi$validate, error, user, validPassword;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -75,15 +71,7 @@ passport.use('local.signin', new LocalStrategy({
             validPassword = _context.sent;
 
             if (validPassword) {
-              token = jwt.sign({
-                id: user.user_id
-              }, config.secret, {
-                expiresIn: 60 * 60 * 24
-              });
               console.log('welcome ' + user.name + ' ' + user.lastname);
-              console.log({
-                token: token
-              });
               done(null, user, req.flash('success', 'welcome ' + user.name + ' ' + user.lastname));
             } else {
               console.log('password incorrect');

@@ -18,14 +18,16 @@ USE `abc-db` ;
 -- Table `mydb`.`USER`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `abc-db`.`USER` (
-  `user_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` VARCHAR(11) NOT NULL,
   `created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `name` VARCHAR(255) NOT NULL,
   `lastname` VARCHAR(255) NOT NULL,
   `birth_date` DATETIME NULL DEFAULT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`user_id`),
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) ,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) )
 ENGINE = InnoDB;
@@ -36,17 +38,17 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `abc-db`.`TRANSACTION` (
   `transaction_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `crated_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `value` FLOAT(16,9) NOT NULL,
+  `user_id` Varchar(11) NOT NULL,
+  `created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `value` FLOAT NOT NULL,
   `points` INT(11) NULL,
   `status` INT(1) NULL DEFAULT 1,
-  `fk_user_id` INT(11) NOT NULL,
   PRIMARY KEY (`transaction_id`),
   UNIQUE INDEX `transaction_id_UNIQUE` (`transaction_id` ASC) ,
-  INDEX `fk_TRANSACTION_USER_idx` (`fk_user_id` ASC) ,
+  INDEX `user_id` (`user_id` ASC) ,
   CONSTRAINT `fk_TRANSACTION_USER`
-    FOREIGN KEY (`fk_user_id`)
-    REFERENCES `mydb`.`USER` (`user_id`)
+    FOREIGN KEY (`user_id`)
+    REFERENCES `abc-db`.`USER` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
