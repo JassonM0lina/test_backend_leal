@@ -58,5 +58,7 @@ Para ejecutar el test de prueba; primero, se debe instalar la carpeta node_modul
 
 El test tendrá el resultado que se puede observar en la siguiente imagen. Adicionalmente, cada prueba tiene de forma detallada el resultado que debe arrojar.
 
+Los archivos en la rama "master", son los mismos que estaban en la rama "version" anterior. Se modifico el archivo pruebas.spec.js de la carpeta test para hacer funcionar las pruebas con mocha y chai. 
+
 ![test](https://user-images.githubusercontent.com/55201355/86294615-86512f00-bbba-11ea-8d9d-b6db1cecc0d9.png)
 
